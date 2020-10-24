@@ -1,6 +1,11 @@
 import math
+""" Example of a simple class
 
-class point2D:
+    Usage: from class_point2D import Point2D
+"""
+
+
+class Point2D:
 
     def __init__(self, x=None, y=None):
         if x is None:
@@ -13,5 +18,5 @@ class point2D:
             self.y = y
 
     def print_distance(self):
-        print('La distancia del punto al origen es {}'.format(math.sqrt(self.x ** 2 + self.y ** 2)))
+        print('Distance to the origin is: {}'.format(math.sqrt(self.x ** 2 + self.y ** 2)))
 
