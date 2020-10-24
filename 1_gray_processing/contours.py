@@ -1,9 +1,14 @@
 import cv2
 import os
+import sys
+""" Contours (use shapes.png as example)
+
+    python contours.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
-    path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
-    image_name = 'shapes.png'
+    path = sys.argv[1]
+    image_name = sys.argv[2]
     path_file = os.path.join(path, image_name)
     image = cv2.imread(path_file)
     image_draw = image.copy()

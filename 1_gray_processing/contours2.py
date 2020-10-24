@@ -1,6 +1,10 @@
 import cv2
 import os
 import numpy as np
+""" Contours advanced example (use coins_india.png as example)
+
+    python contours2.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
     path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
@@ -11,7 +15,7 @@ if __name__ == '__main__':
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     ret, Ibw_coins = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-    # floodfill
+    # flood fill
     height, width = image.shape[:2]
     mask = np.zeros((height + 2, width + 2), np.uint8)
     coins_floodfill = Ibw_coins.copy()
@@ -21,7 +25,7 @@ if __name__ == '__main__':
     # coins mask
     coins = cv2.bitwise_or(Ibw_coins, coins_floodfill_inv)
 
-    # countours
+    # contours
     contours, hierarchy = cv2.findContours(coins, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     image_draw = image.copy()
     for idx, cont in enumerate(contours):

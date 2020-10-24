@@ -1,10 +1,15 @@
 import cv2
+import sys
 import os
 from matplotlib import pyplot as plt
+""" Histogram computation
+
+    python histogram.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
-    path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
-    image_name = 'lena.png'
+    path = sys.argv[1]
+    image_name = sys.argv[2]
     path_file = os.path.join(path, image_name)
     image = cv2.imread(path_file)
 
