@@ -1,5 +1,9 @@
 import numpy as np
 
+""" Noise class
+
+"""
+
 
 def noise(noise_typ, image):
     if noise_typ == "gauss":

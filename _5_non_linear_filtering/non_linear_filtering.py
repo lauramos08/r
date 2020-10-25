@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from noise import noise
+from _4_linear_filtering.noise import noise
 import os
 import sys
 import time

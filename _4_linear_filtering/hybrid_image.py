@@ -1,9 +1,15 @@
 import cv2
 import numpy as np
 import os
+import sys
+
+""" Hybrid image generation
+
+    python hybrid_image.py <path_to_images>
+"""
 
 if __name__ == '__main__':
-    path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
+    path = sys.argv[1]
     image_name_1 = 'cat.png'
     image_name_2 = 'dog.png'
     path_file = os.path.join(path, image_name_1)
@@ -13,12 +19,11 @@ if __name__ == '__main__':
     image_gray_1 = cv2.cvtColor(image_1, cv2.COLOR_BGR2GRAY)
     image_gray_2 = cv2.cvtColor(image_2, cv2.COLOR_BGR2GRAY)
 
-
-    # Low-pass via Gaussian filtering
+    # low-pass via Gaussian filtering
     N = 21
     image_filtered_lp = cv2.GaussianBlur(image_gray_1, (N, N), 2.5, 2.5)
 
-    # High-pass via FFT
+    # high-pass via FFT
     image_gray_fft_2 = np.fft.fft2(image_gray_2)
     image_gray_fft_shift_2 = np.fft.fftshift(image_gray_fft_2)
 
@@ -45,7 +50,4 @@ if __name__ == '__main__':
     cv2.imshow("lp", image_filtered_lp)
     cv2.imshow("hp", image_filtered_hp)
     cv2.imshow("hybrid", image_hybrid)
-
-    # save image
-    cv2.imwrite("hybrid.png", image_hybrid)
     cv2.waitKey(0)

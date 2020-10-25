@@ -1,15 +1,19 @@
 import numpy as np
 import cv2
 
+""" Methods to compute pixel orientation
+
+"""
+
 
 def gradient_map(gray):
     # Image derivatives
-    SCALE = 1
-    DELTA = 0
-    DDEPTH = cv2.CV_16S  ## to avoid overflow
+    scale = 1
+    delta = 0
+    depth = cv2.CV_16S  # to avoid overflow
 
-    grad_x = cv2.Sobel(gray, DDEPTH, 1, 0, ksize=3, scale=SCALE, delta=DELTA)
-    grad_y = cv2.Sobel(gray, DDEPTH, 0, 1, ksize=3, scale=SCALE, delta=DELTA)
+    grad_x = cv2.Sobel(gray, depth, 1, 0, ksize=3, scale=scale, delta=delta)
+    grad_y = cv2.Sobel(gray, depth, 0, 1, ksize=3, scale=scale, delta=delta)
 
     grad_x = np.float32(grad_x)
     grad_x = grad_x * (1 / 512)
@@ -31,12 +35,12 @@ def gradient_map(gray):
 
 def orientation_map(gray, n):
     # Image derivatives
-    SCALE = 1
-    DELTA = 0
-    DDEPTH = cv2.CV_16S  ## to avoid overflow
+    scale = 1
+    delta = 0
+    depth = cv2.CV_16S  # to avoid overflow
 
-    grad_x = cv2.Sobel(gray, DDEPTH, 1, 0, ksize=3, scale=SCALE, delta=DELTA)
-    grad_y = cv2.Sobel(gray, DDEPTH, 0, 1, ksize=3, scale=SCALE, delta=DELTA)
+    grad_x = cv2.Sobel(gray, depth, 1, 0, ksize=3, scale=scale, delta=delta)
+    grad_y = cv2.Sobel(gray, depth, 0, 1, ksize=3, scale=scale, delta=delta)
 
     grad_x = np.float32(grad_x)
     grad_x = grad_x * (1 / 512)

@@ -1,11 +1,17 @@
 import cv2
 import numpy as np
-from noise import noise
 import os
+import sys
+from _4_linear_filtering.noise import noise
+
+""" OpenCV linear filtering methods
+
+    python linear_filtering.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
-    path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
-    image_name = 'lena.png'
+    path = sys.argv[1]
+    image_name = sys.argv[2]
     path_file = os.path.join(path, image_name)
     image = cv2.imread(path_file)
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -17,7 +23,7 @@ if __name__ == '__main__':
     # window size
     N = 7
 
-    # 1) convolution (kernel, mascara, filtro de convolucion, respuesta impulso)
+    # 1) convolution
     kernel = np.array([[0, 0.5, 0], [0.5, 2, 0.5], [0, 0.5, 0]]) / 3
     image_convolved = cv2.filter2D(image_gray_noisy, -1, kernel)
 
