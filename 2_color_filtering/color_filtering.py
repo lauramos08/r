@@ -1,10 +1,14 @@
 import cv2
 import os
-from matplotlib import pyplot as plt
+import sys
+""" Color filtering based on Hue histogram peak
+
+    python color_filtering.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
-    path = '/Users/julian.quiroga/Downloads/imagenes_vision_puj/imagenes'
-    image_name = 'soccer_game.png'
+    path = sys.argv[1]
+    image_name = sys.argv[2]
     path_file = os.path.join(path, image_name)
     image = cv2.imread(path_file)
 
@@ -16,13 +20,13 @@ if __name__ == '__main__':
     max_val = hist_hsv.max()
     max_pos = int(hist_hsv.argmax())
 
-    # grass mask
+    # Peak mask
     lim_inf = (max_pos - 10, 0, 0)
     lim_sup = (max_pos + 10, 255, 255)
-    mask_grass = cv2.inRange(image_hsv, lim_inf, lim_sup)
-    mask_not_grass = cv2.bitwise_not(mask_grass)
+    mask = cv2.inRange(image_hsv, lim_inf, lim_sup)
+    mask_not = cv2.bitwise_not(mask)
 
     cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Image", 1280, 720)
-    cv2.imshow("Image", mask_not_grass)
+    cv2.imshow("Image", mask_not)
     cv2.waitKey(0)
