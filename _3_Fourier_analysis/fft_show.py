@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
 
+""" FFT class to properly visualize fft of gray image
+
+"""
+
 
 class FFT:
     def __init__(self, image, n):
@@ -21,4 +25,4 @@ class FFT:
         image_fft_view = np.log(image_gray_fft_mag + 1)
         image_fft_view = image_fft_view / np.max(image_fft_view)
         cv2.imshow("FFT", image_fft_view)
-        cv2.waitKey(5000)
+        cv2.waitKey(0)
