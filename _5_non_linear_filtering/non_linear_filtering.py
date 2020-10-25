@@ -1,13 +1,16 @@
 import cv2
 import numpy as np
-from _4_linear_filtering.noise import noise
 import os
 import sys
 import time
+from _4_linear_filtering.noise import noise
 
+""" OpenCV non-linear filtering methods
+
+    python non_linear_filtering.py <path_to_image> <image_name>
+"""
 
 if __name__ == '__main__':
-    print(sys.argv[0])
     path = sys.argv[1]
     image_name = sys.argv[2]
     path_file = os.path.join(path, image_name)
